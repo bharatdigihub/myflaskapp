@@ -1,0 +1,32 @@
+# Render.com service configuration
+services:
+  - type: web
+    name: flask-postgres-app
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: FLASK_ENV
+        value: production
+      - key: DB_HOST
+        fromDatabase:
+          name: flaskdb
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: flaskdb
+          property: port
+      - key: DB_USER
+        fromDatabase:
+          name: flaskdb
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: flaskdb
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: flaskdb
+          property: database
