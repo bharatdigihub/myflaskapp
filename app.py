@@ -19,8 +19,18 @@ def get_db_connection(retries=5, delay=2):
     dbname = os.environ.get("DB_NAME")
 
     # Validate required environment variables
-    if not all([host, user, password, dbname]):
-        raise ValueError("Missing required database environment variables.")
+    missing_vars = []
+    if not host:
+        missing_vars.append("DB_HOST")
+    if not user:
+        missing_vars.append("DB_USER")
+    if not password:
+        missing_vars.append("DB_PASSWORD")
+    if not dbname:
+        missing_vars.append("DB_NAME")
+    
+    if missing_vars:
+        raise ValueError(f"Missing required database environment variables: {', '.join(missing_vars)}")
 
     last_exc = None
     for attempt in range(1, retries + 1):

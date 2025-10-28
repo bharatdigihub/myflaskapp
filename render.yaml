@@ -10,23 +10,13 @@ services:
         value: 3.10.0
       - key: FLASK_ENV
         value: production
+      # Database configuration must be set in Render.com dashboard
       - key: DB_HOST
-        fromDatabase:
-          name: flaskdb
-          property: host
+        value: dpg-d40c5cpr0fns73bknii0-a
       - key: DB_PORT
-        fromDatabase:
-          name: flaskdb
-          property: port
+        value: 5432
       - key: DB_USER
-        fromDatabase:
-          name: flaskdb
-          property: user
-      - key: DB_PASSWORD
-        fromDatabase:
-          name: flaskdb
-          property: password
+        value: flaskdb_3ib6_user
       - key: DB_NAME
-        fromDatabase:
-          name: flaskdb
-          property: database
+        value: flaskdb_3ib6
+      # Note: DB_PASSWORD should be set as a secret in Render.com dashboard
